@@ -86,5 +86,16 @@ module.exports = {
         }
       }
     }
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        // additionalData: 或prependData; 8版本用prependData:
+        additionalData: `
+          @import "@/styles/variables.scss";  // scss文件地址
+          @import "@/styles/mixin.scss";     // scss文件地址
+        `
+      }
+    }
   }
 }
