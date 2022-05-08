@@ -16,7 +16,8 @@
           <edit />
         </el-icon> -->
         <svg-icon icon="password" class="svg-container"></svg-icon>
-        <el-input v-model="form.password" />
+        <el-input v-model="form.password" type="password" show-password />
+        <!-- <svg-icon icon="eye"></svg-icon> -->
       </el-form-item>
       <el-button type="primary" class="login-button" @click="handleLogin"
         >用户登录</el-button
@@ -30,10 +31,11 @@ import { ref } from 'vue'
 import { login } from '@/api/login'
 // import { Edit } from '@element-plus/icons-vue'
 const form = ref({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: '123456'
 })
 
+// 在vue在中，所有响应式数据都需要用ref声明
 const rules = ref({
   username: [
     {
@@ -55,7 +57,8 @@ const handleLogin = () => {
   formRef.value.validate(async (valid) => {
     if (valid) {
       // alert('submit!')
-      login(form.value)
+      const res = await login(form.value)
+      console.log(res)
     } else {
       console.log('error submit!!')
       return false
@@ -97,6 +100,7 @@ $cursor: #fff;
       width: 85%;
 
       .el-input__wrapper {
+        display: flex;
         box-shadow: 0 0 0 0;
         background-color: inherit;
       }
