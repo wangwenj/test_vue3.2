@@ -6,6 +6,7 @@ const service = axios.create({
   timeout: 5000
 })
 
+// 请求拦截器
 service.interceptors.request.use(
   (config) => {
     config.headers.Authorization = localStorage.getItem('token')
@@ -16,7 +17,7 @@ service.interceptors.request.use(
   }
 )
 
-// 响应请求拦截器，可以提前处理数据;对返回的数据作出响应的反应
+// 响应拦截器，可以提前处理数据;对返回的数据作出响应的反应
 service.interceptors.response.use(
   (response) => {
     const { data, meta } = response.data
