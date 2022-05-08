@@ -28,8 +28,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import { login } from '@/api/login'
+import { useStore } from 'vuex'
+// import { login } from '@/api/login'
 // import { Edit } from '@element-plus/icons-vue'
+const store = useStore()
 const form = ref({
   username: 'admin',
   password: '123456'
@@ -57,8 +59,9 @@ const handleLogin = () => {
   formRef.value.validate(async (valid) => {
     if (valid) {
       // alert('submit!')
-      const res = await login(form.value)
-      console.log(res)
+      // const res = await login(form.value)
+      // console.log(res)
+      store.dispatch('app/login', form.value) // app/login, 是因为使用了命名空间
     } else {
       console.log('error submit!!')
       return false

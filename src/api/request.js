@@ -6,7 +6,17 @@ const service = axios.create({
   timeout: 5000
 })
 
-// 响应请求拦截器，可以提前处理数据
+service.interceptors.request.use(
+  (config) => {
+    config.headers.Authorization = localStorage.getItem('token')
+    return config
+  },
+  (error) => {
+    return Promise.reject(new Error(error))
+  }
+)
+
+// 响应请求拦截器，可以提前处理数据;对返回的数据作出响应的反应
 service.interceptors.response.use(
   (response) => {
     const { data, meta } = response.data
